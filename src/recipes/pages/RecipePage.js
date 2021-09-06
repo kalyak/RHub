@@ -1,6 +1,6 @@
 import React from "react";
-import { Col, Container, Image, ListGroup, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Col, Container, Image, Row } from "react-bootstrap";
+import CommentForm from "../components/CommentForm";
 import Comments from "../components/Comments";
 import IngredientsList from "../components/IngerdientsList";
 import InstructionsList from "../components/InstructionsList";
@@ -54,7 +54,7 @@ const DUMMY_RECIPE = {
   ],
 };
 const RecipePage = () => {
-  const recipeId = useParams().rid;
+  // const recipeId = useParams().rid;
   return (
     <Container>
       <Row className="mb-5">
@@ -62,7 +62,7 @@ const RecipePage = () => {
           <h2>{DUMMY_RECIPE.title}</h2>
           <p>
             Subbmitted by {DUMMY_RECIPE.user}, updated on{" "}
-            {DUMMY_RECIPE.updateDate.toDateString()}
+            {DUMMY_RECIPE.updateDate.toLocaleDateString()}
           </p>
           <big>
             <StarRating rating={DUMMY_RECIPE.rating} />
@@ -73,7 +73,7 @@ const RecipePage = () => {
           <br />
           <br />
           <p>{DUMMY_RECIPE.description}</p>
-          <i class="bi bi-heart" /> save to favourites
+          <i className="bi bi-heart" /> save to favourites
         </Col>
         <Col>
           <Image
@@ -87,15 +87,20 @@ const RecipePage = () => {
           />
         </Col>
       </Row>
+      <hr />
       <Row>
         <Col xs={12} md={4}>
           <IngredientsList ingredientsList={DUMMY_RECIPE.ingredientsList} />
-        </Col>
+        </Col>{" "}
+        {/* <hr /> */}
         <Col xs={12} md={8}>
           <InstructionsList instructionsList={DUMMY_RECIPE.instructionsList} />
         </Col>
       </Row>
+      <hr />
       <Row className="justify-content-center">
+        <h3>Comments</h3>
+        <CommentForm />
         <Comments />
       </Row>
     </Container>

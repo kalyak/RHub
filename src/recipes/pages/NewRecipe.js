@@ -1,8 +1,13 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import RecipeForm from "../components/RecipeForm";
 
 const NewRecipe = () => {
-  return <Form></Form>;
+  return (
+    <Container>
+      <RecipeForm />
+    </Container>
+  );
 };
 
 export default NewRecipe;

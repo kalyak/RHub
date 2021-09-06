@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Button, Card, Carousel, Image, Row } from "react-bootstrap";
+import { Button, Card, Carousel, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import RecipeTags from "./RecipeTags";
 import StarRating from "./StarRating";
 
 const RecipeCarousel = ({ recipes }) => {
@@ -13,7 +12,7 @@ const RecipeCarousel = ({ recipes }) => {
   return (
     <Carousel className="border border-5">
       {recipes.map((recipe) => {
-        const date = recipe.updateDate.toDateString();
+        const date = recipe.updateDate.toLocaleDateString();
         return (
           // <RecipeCarouselItem key={recipe.id} recipe={recipe} />
           <Carousel.Item
