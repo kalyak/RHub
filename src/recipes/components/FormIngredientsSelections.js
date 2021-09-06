@@ -2,6 +2,14 @@ import React from "react";
 import { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 
+const DUMMY_INGREDIENTS = [
+  { id: "chocolate", ingredientName: "Chocolate" },
+  { id: "milk", ingredientName: "Milk" },
+  { id: "sugar", ingredientName: "Sugar" },
+  { id: "water", ingredientName: "Water" },
+  { id: "tea", ingredientName: "Tea" },
+];
+
 const FormIngredientsSelections = () => {
   const [ingredientsList, setIngredientsList] = useState([
     {
@@ -16,7 +24,6 @@ const FormIngredientsSelections = () => {
     const newIngredientsList = [...ingredientsList];
     newIngredientsList[index][id] = value;
     setIngredientsList(newIngredientsList);
-    console.log(newIngredientsList);
   };
   const addIngredientHandler = () => {
     setIngredientsList([
@@ -27,17 +34,19 @@ const FormIngredientsSelections = () => {
 
   const removeIngredientHandler = (index) => {
     const newIngredientsList = [...ingredientsList];
-    console.log("index to remove: ", index, newIngredientsList[index]);
     newIngredientsList.splice(index, 1);
     setIngredientsList(newIngredientsList);
-    console.log(newIngredientsList);
   };
 
   return (
-    <React.Fragment>
+    <Form.Group className="mb-3">
       <Form.Label>Ingredients</Form.Label>
       {ingredientsList.map((ingredient, index) => (
-        <Row name="ingredientRow" key={index} className="align-items-center">
+        <Row
+          name="ingredientRow"
+          key={index}
+          className="align-items-center mb-1"
+        >
           <Form.Group as={Col} md="1" controlId="amount">
             <Form.Control
               type="number"
@@ -101,8 +110,8 @@ const FormIngredientsSelections = () => {
           )}
         </Row>
       ))}
-      {JSON.stringify(ingredientsList)}
-    </React.Fragment>
+      {/* {JSON.stringify(ingredientsList)} */}
+    </Form.Group>
   );
 };
 
