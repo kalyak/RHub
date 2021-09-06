@@ -2,13 +2,13 @@ import React from "react";
 import { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 
-const DUMMY_INGREDIENTS = [
-  { id: "chocolate", ingredientName: "Chocolate" },
-  { id: "milk", ingredientName: "Milk" },
-  { id: "sugar", ingredientName: "Sugar" },
-  { id: "water", ingredientName: "Water" },
-  { id: "tea", ingredientName: "Tea" },
-];
+// const DUMMY_INGREDIENTS = [
+//   { id: "chocolate", ingredientName: "Chocolate" },
+//   { id: "milk", ingredientName: "Milk" },
+//   { id: "sugar", ingredientName: "Sugar" },
+//   { id: "water", ingredientName: "Water" },
+//   { id: "tea", ingredientName: "Tea" },
+// ];
 
 const FormIngredientsSelections = () => {
   const [ingredientsList, setIngredientsList] = useState([
