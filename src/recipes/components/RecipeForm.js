@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import React from "react";
+import { Container, Form } from "react-bootstrap";
+import FormIngredientsSelections from "./FormIngredientsSelections";
 
 const DUMMY_RECIPE = {
   id: "r1",
@@ -49,34 +50,6 @@ const DUMMY_RECIPE = {
 };
 
 const RecipeForm = () => {
-  const [ingredientsList, setIngredientsList] = useState([
-    {
-      amount: 0,
-      unit: "",
-      ingredientName: "",
-    },
-  ]);
-
-  const editIngredientHander = (event, index) => {
-    const { id, value } = event.target;
-    const newIngredientsList = [...ingredientsList];
-    newIngredientsList[index][id] = value;
-    setIngredientsList(newIngredientsList);
-  };
-  const addIngredientHandler = () => {
-    setIngredientsList([
-      ...ingredientsList,
-      { amount: 0, unit: "", ingredientName: "" },
-    ]);
-  };
-
-  const removeIngredientHandler = (index) => {
-    const newIngredientsList = [...ingredientsList];
-    newIngredientsList.splice(index, 1);
-    setIngredientsList(newIngredientsList);
-    console.log(newIngredientsList);
-  };
-
   return (
     <Container>
       <h3>New Recipe</h3>
@@ -109,79 +82,7 @@ const RecipeForm = () => {
           <Form.Label>Recipe Image</Form.Label>
           <Form.Control type="file" alt="Recipe image file picker" />
         </Form.Group>
-        <Form.Label>Ingredients</Form.Label>
-        {ingredientsList.map((ingredient, index) => (
-          <Row name="ingredientRow" key={index} className="align-items-center">
-            {/* <Col md="1"> */}
-            <Form.Group as={Col} md="1" controlId="amount">
-              <Form.Control
-                type="number"
-                placeholder="Amount"
-                onChange={(event) => editIngredientHander(event, index)}
-                value={ingredient.amount}
-                min={0}
-                step={0.01}
-              />
-            </Form.Group>
-            {/* </Col> */}
-            {/* <Col md="2"> */}
-            <Form.Group as={Col} md="2" controlId="unit">
-              <Form.Select
-                onChange={(event) => editIngredientHander(event, index)}
-                value={ingredient.unit}
-              >
-                <option value="" disabled hidden>
-                  unit [Please select]
-                </option>
-                <option value="cup">cup</option>
-                <option value="tbsp">tablespoon</option>
-                <option value="tsp">fluid ounce</option>
-                <option value="gram">gram</option>
-                <option value="ml">ml</option>
-              </Form.Select>
-            </Form.Group>
-            {/* </Col> */}
-            {/* <Col md="4"> */}
-            <Form.Group as={Col} md="4" controlId="ingredientName">
-              <Form.Select
-                onChange={(event) => editIngredientHander(event, index)}
-                value={ingredient.ingredientName}
-              >
-                <option value="" disabled hidden>
-                  ingredient [Please select]
-                </option>
-                <option value="chocolate">Chocolate</option>
-                <option value="milk">Milk</option>
-                <option value="i3">Sugar</option>
-                <option value="i4">Water</option>
-                <option value="i5">Tea</option>
-              </Form.Select>
-            </Form.Group>
-            {/* </Col> */}
-            <Col md="auto">
-              <Button
-                name="removeIngredientBtn"
-                onClick={(index) => removeIngredientHandler(index)}
-                variant="outline-danger"
-                size="sm"
-              >
-                <i
-                  className="bi bi-x-lg"
-                  style={{ fontSize: "1rem", color: "red" }}
-                />
-                {/* X */}
-              </Button>
-            </Col>
-            {index === ingredientsList.length - 1 && (
-              <Col md="auto">
-                <Button name="adddIngredientBtn" onClick={addIngredientHandler}>
-                  Add another
-                </Button>
-              </Col>
-            )}
-          </Row>
-        ))}
-        {JSON.stringify(ingredientsList)}
+        <FormIngredientsSelections />
       </Form>
     </Container>
   );
