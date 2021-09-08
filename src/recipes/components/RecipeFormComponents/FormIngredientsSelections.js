@@ -106,7 +106,7 @@ const FormIngredientsSelections = ({
           {index === ingredientsList.length - 1 && (
             <Col md="auto">
               <Button name="adddIngredientBtn" onClick={addIngredientHandler}>
-                Add another
+                Add another ingredient
               </Button>
             </Col>
           )}

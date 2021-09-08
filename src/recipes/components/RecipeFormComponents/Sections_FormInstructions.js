@@ -31,93 +31,132 @@ const FormInstructions = ({
 
   const editInstructionhandler = (event, sectionIndex, index = null) => {
     const { id, value } = event.target;
-    console.log(index, id, value);
+    // console.log(sectionIndex, index, id, value);
     const newInstructionsList = [...instructionsList];
     index === null
       ? (newInstructionsList[sectionIndex][id] = value)
       : (newInstructionsList[sectionIndex][id][index] = value);
-    console.log(newInstructionsList);
+    // console.log(newInstructionsList);
     setInstructions(newInstructionsList);
   };
+
+  const addSectionHandler = () => {
+    setInstructions([
+      ...instructionsList,
+      { instructionsFor: "", instructions: [""] },
+    ]);
+  };
+
+  const removeSectionHandler = (sectionIndex) => {
+    const newInstructionsList = [...instructionsList];
+    newInstructionsList.splice(sectionIndex, 1);
+    setInstructions(newInstructionsList);
+  };
+
   const addInstructionHandler = (sectionIndex) => {
     const newInstructionsList = [...instructionsList];
     newInstructionsList[sectionIndex].instructions.push("");
     setInstructions(newInstructionsList);
   };
 
-  const removeInstructionHandler = (index) => {
+  const removeInstructionHandler = (sectionIndex, index) => {
     const newInstructionsList = [...instructionsList];
-    newInstructionsList.splice(index, 1);
+    newInstructionsList[sectionIndex].instructions.splice(index, 1);
     setInstructions(newInstructionsList);
   };
-
-  const instructionsRender = instructionsList.map((section, sectionIndex) => {
-    return (
-      <Form.Group key={sectionIndex}>
-        <Form.Group as={Row} controlId="instructionsFor">
-          <Form.Label column sm="auto">
-            Section
-          </Form.Label>
-          <Col sm="4">
-            <Form.Control
-              placeholder="Instruction for..."
-              value={section.instructionsFor}
-              onChange={(event) => editInstructionhandler(event, sectionIndex)}
-            />
-          </Col>
-        </Form.Group>
-        {section.instructions.map((instruction, index) => (
-          <Row name="instructionRow" key={index} className="align-items-center">
-            <Col>
-              <InputGroup>
-                <InputGroup.Text lg={1}>{index + 1}.</InputGroup.Text>
-                <FormControl
-                  as="textarea"
-                  rows={1}
-                  id={`instructions`}
-                  placeholder="Next step"
-                  value={instruction}
-                  onChange={(event) =>
-                    editInstructionhandler(event, sectionIndex, index)
-                  }
-                ></FormControl>
-              </InputGroup>
-            </Col>
-            <Col md="auto">
-              <Button
-                name="removeInstructionBtn"
-                onClick={() => removeInstructionHandler(index)}
-                variant="outline-danger"
-                size="sm"
-              >
-                <i
-                  className="bi bi-x-lg"
-                  style={{ fontSize: "1rem", color: "red" }}
-                />
-                {/* X */}
-              </Button>
-            </Col>
-            {index === section.instructions.length - 1 && (
-              <Col md="auto">
-                <Button
-                  name="adddInstructionBtn"
-                  onClick={() => addInstructionHandler(sectionIndex)}
-                >
-                  Add another
-                </Button>
-              </Col>
-            )}
-          </Row>
-        ))}
-      </Form.Group>
-    );
-  });
 
   return (
     <Form.Group className="mb-5">
       <Form.Label>Instructions</Form.Label>
-      {instructionsRender}
-      {/* {JSON.stringify(instructionsList)} */}
+      {instructionsList.map((section, sectionIndex) => {
+        return (
+          <Form.Group className="mb-3" key={sectionIndex}>
+            <Form.Group as={Row} controlId="instructionsFor">
+              <Form.Label column sm="auto">
+                Section
+              </Form.Label>
+              <Col sm="4">
+                <Form.Control
+                  placeholder="Instruction for..."
+                  value={section.instructionsFor}
+                  onChange={(event) =>
+                    editInstructionhandler(event, sectionIndex)
+                  }
+                />
+              </Col>
+              <Col md="auto">
+                <Button
+                  onClick={() => removeSectionHandler(sectionIndex)}
+                  variant="outline-danger"
+                  size="sm"
+                >
+                  <i
+                    className="bi bi-x-lg"
+                    style={{ fontSize: "1rem", color: "red" }}
+                  />
+                  {/* X */}
+                </Button>
+              </Col>
+              {sectionIndex === instructionsList.length - 1 && (
+                <Col md="auto">
+                  <Button onClick={addSectionHandler}>
+                    Add new instruction section
+                  </Button>
+                </Col>
+              )}
+            </Form.Group>
+            {section.instructions.map((instruction, index) => (
+              <Row
+                name="instructionRow"
+                key={index}
+                className="align-items-center"
+              >
+                <Col>
+                  <InputGroup>
+                    <InputGroup.Text lg={1}>{index + 1}.</InputGroup.Text>
+                    <FormControl
+                      as="textarea"
+                      rows={1}
+                      id={`instructions`}
+                      placeholder="Next step"
+                      value={instruction}
+                      onChange={(event) =>
+                        editInstructionhandler(event, sectionIndex, index)
+                      }
+                    ></FormControl>
+                  </InputGroup>
+                </Col>
+                <Col md="auto">
+                  <Button
+                    name="removeInstructionBtn"
+                    onClick={() =>
+                      removeInstructionHandler(sectionIndex, index)
+                    }
+                    variant="outline-danger"
+                    size="sm"
+                  >
+                    <i
+                      className="bi bi-x-lg"
+                      style={{ fontSize: "1rem", color: "red" }}
+                    />
+                    {/* X */}
+                  </Button>
+                </Col>
+                {index === section.instructions.length - 1 && (
+                  <Col md="auto">
+                    <Button
+                      name="adddInstructionBtn"
+                      onClick={() => addInstructionHandler(sectionIndex)}
+                    >
+                      Add another step
+                    </Button>
+                  </Col>
+                )}
+              </Row>
+            ))}
+          </Form.Group>
+        );
+      })}
     </Form.Group>
   );
 };
