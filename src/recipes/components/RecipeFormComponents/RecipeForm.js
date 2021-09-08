@@ -1,11 +1,11 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
-import FormIngredientsSelections from "./FormIngredientsSelections";
+import FormIngredientsSelections from "./Sections_FormIngredientsSelections";
 import FormInstructions from "./Sections_FormInstructions";
 // import FormInstructions from "./FormInstructions";
 
 const RecipeForm = ({ recipe = {} }) => {
-  console.log(recipe);
+  // console.log(recipe);
 
   const submitHandler = (event) => {
     event.preventDefault();

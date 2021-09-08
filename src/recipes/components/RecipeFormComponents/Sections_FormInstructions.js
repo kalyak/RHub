@@ -31,12 +31,10 @@ const FormInstructions = ({
 
   const editInstructionhandler = (event, sectionIndex, index = null) => {
     const { id, value } = event.target;
-    // console.log(sectionIndex, index, id, value);
     const newInstructionsList = [...instructionsList];
     index === null
       ? (newInstructionsList[sectionIndex][id] = value)
       : (newInstructionsList[sectionIndex][id][index] = value);
-    // console.log(newInstructionsList);
     setInstructions(newInstructionsList);
   };
 
@@ -84,23 +82,24 @@ const FormInstructions = ({
                   }
                 />
               </Col>
-              <Col md="auto">
-                <Button
-                  onClick={() => removeSectionHandler(sectionIndex)}
-                  variant="outline-danger"
-                  size="sm"
-                >
-                  <i
-                    className="bi bi-x-lg"
-                    style={{ fontSize: "1rem", color: "red" }}
-                  />
-                  {/* X */}
-                </Button>
-              </Col>
+              {instructionsList.length !== 1 && (
+                <Col md="auto">
+                  <Button
+                    onClick={() => removeSectionHandler(sectionIndex)}
+                    variant="outline-danger"
+                    size="sm"
+                  >
+                    <i
+                      className="bi bi-x-lg"
+                      style={{ fontSize: "1rem", color: "red" }}
+                    />
+                  </Button>
+                </Col>
+              )}
               {sectionIndex === instructionsList.length - 1 && (
                 <Col md="auto">
                   <Button onClick={addSectionHandler}>
-                    Add new instruction section
+                    New instruction section
                   </Button>
                 </Col>
               )}
@@ -126,29 +125,31 @@ const FormInstructions = ({
                     ></FormControl>
                   </InputGroup>
                 </Col>
-                <Col md="auto">
-                  <Button
-                    name="removeInstructionBtn"
-                    onClick={() =>
-                      removeInstructionHandler(sectionIndex, index)
-                    }
-                    variant="outline-danger"
-                    size="sm"
-                  >
-                    <i
-                      className="bi bi-x-lg"
-                      style={{ fontSize: "1rem", color: "red" }}
-                    />
-                    {/* X */}
-                  </Button>
-                </Col>
+                {section.instructions.length !== 1 && (
+                  <Col md="auto">
+                    <Button
+                      name="removeInstructionBtn"
+                      onClick={() =>
+                        removeInstructionHandler(sectionIndex, index)
+                      }
+                      variant="outline-danger"
+                      size="sm"
+                    >
+                      <i
+                        className="bi bi-x-lg"
+                        style={{ fontSize: "1rem", color: "red" }}
+                      />
+                      {/* X */}
+                    </Button>
+                  </Col>
+                )}
                 {index === section.instructions.length - 1 && (
                   <Col md="auto">
                     <Button
                       name="adddInstructionBtn"
                       onClick={() => addInstructionHandler(sectionIndex)}
                     >
-                      Add another step
+                      New step
                     </Button>
                   </Col>
                 )}

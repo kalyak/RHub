@@ -78,7 +78,7 @@ const FormInstructions = ({ initialInstructions = [""] }) => {
           {index === instructionsList.length - 1 && (
             <Col md="auto">
               <Button name="adddInstructionBtn" onClick={addInstructionHandler}>
-                Add another
+                New step
               </Button>
             </Col>
           )}
