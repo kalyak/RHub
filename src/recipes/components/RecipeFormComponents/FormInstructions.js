@@ -9,27 +9,42 @@ import {
   Row,
 } from "react-bootstrap";
 
-const FormInstructions = () => {
-  const [instructionsList, setInstructions] = useState(["s"]);
+// const DUMMY_INSTRUCTIONS = [
+//   {
+//     instructionsFor: "Brigadeiros",
+//     instructions: [
+//       "Pour the condensed milk into a pot. Stir in the cocoa powder and the salt.",
+//       "Cook, stirring constantly, over low heat. Keep the mixture barely at a boil to prevent burning and sticking.",
+//       "Cook for 10 to 15 minutes, stirring constantly until the mixture becomes very thick and shiny and starts to pull away from the bottom and sides of the pan.",
+//       "Remove from the heat and stir in the butter and vanilla.",
+//       "Chill in the refrigerator for 20 to 30 minutes. With buttered hands, roll the mixture into 1-inch balls.",
+//       "Roll each ball in the chocolate sprinkles and place in a paper cup.",
+//       "Chill until ready to serve.",
+//     ],
+//   },
+// ];
+
+const FormInstructions = ({ initialInstructions = [""] }) => {
+  const [instructionsList, setInstructions] = useState(initialInstructions);
 
   const editInstructionhandler = (event, index) => {
     const { value } = event.target;
-    const newIngredientsList = [...instructionsList];
-    newIngredientsList[index] = value;
-    setInstructions(newIngredientsList);
+    const newInstructionsList = [...instructionsList];
+    newInstructionsList[index] = value;
+    setInstructions(newInstructionsList);
   };
   const addInstructionHandler = () => {
     setInstructions([...instructionsList, ""]);
   };
 
   const removeInstructionHandler = (index) => {
-    const newIngredientsList = [...instructionsList];
-    newIngredientsList.splice(index, 1);
-    setInstructions(newIngredientsList);
+    const newInstructionsList = [...instructionsList];
+    newInstructionsList.splice(index, 1);
+    setInstructions(newInstructionsList);
   };
 
   return (
-    <Form.Group>
+    <Form.Group className="mb-5">
       <Form.Label>Instructions</Form.Label>
       {instructionsList.map((instruction, index) => (
         <Row name="instructionRow" key={index} className="align-items-center">
@@ -48,7 +63,7 @@ const FormInstructions = () => {
           </Col>
           <Col md="auto">
             <Button
-              name="removeIngredientBtn"
+              name="removeInstructionBtn"
               onClick={() => removeInstructionHandler(index)}
               variant="outline-danger"
               size="sm"
@@ -62,7 +77,7 @@ const FormInstructions = () => {
           </Col>
           {index === instructionsList.length - 1 && (
             <Col md="auto">
-              <Button name="adddIngredientBtn" onClick={addInstructionHandler}>
+              <Button name="adddInstructionBtn" onClick={addInstructionHandler}>
                 Add another
               </Button>
             </Col>

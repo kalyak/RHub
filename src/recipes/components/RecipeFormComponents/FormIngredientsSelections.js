@@ -10,14 +10,16 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 //   { id: "tea", ingredientName: "Tea" },
 // ];
 
-const FormIngredientsSelections = () => {
-  const [ingredientsList, setIngredientsList] = useState([
+const FormIngredientsSelections = ({
+  initialIngredients = [
     {
       amount: 0,
       unit: "",
       ingredientName: "",
     },
-  ]);
+  ],
+}) => {
+  const [ingredientsList, setIngredientsList] = useState(initialIngredients);
 
   const editIngredientHander = (event, index) => {
     const { id, value } = event.target;

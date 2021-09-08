@@ -5,8 +5,9 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import NewRecipe from "./recipes/pages/NewRecipe";
-import RecipeHome from "./recipes/pages/RecipeHome";
+import EditRecipePage from "./recipes/pages/EditRecipePage";
+import NewRecipePage from "./recipes/pages/NewRecipePage";
+import RecipeHomePage from "./recipes/pages/RecipeHomePage";
 import RecipePage from "./recipes/pages/RecipePage";
 import Layout from "./shared/components/Layout";
 import AuthPage from "./users/pages/AuthPage";
@@ -17,13 +18,16 @@ const App = () => {
       <Layout>
         <Switch>
           <Route path="/" exact>
-            <RecipeHome />
+            <RecipeHomePage />
           </Route>
           <Route path="/recipes/new" exact>
-            <NewRecipe />
+            <NewRecipePage />
           </Route>
-          <Route path="/recipes/:rid">
+          <Route path="/recipes/:rid" exact>
             <RecipePage />
+          </Route>
+          <Route path="/recipes/:rid/edit" exact>
+            <EditRecipePage />
           </Route>
           <Route path="/auth" exact>
             <AuthPage />

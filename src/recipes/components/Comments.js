@@ -22,8 +22,8 @@ const Comments = () => {
   return (
     <Container>
       <ListGroup className="mx-5">
-        {DUMMY_COMMENTS.map((comment) => (
-          <ListGroup.Item>
+        {DUMMY_COMMENTS.map((comment, index) => (
+          <ListGroup.Item key={index}>
             <Row>
               <Col md={2}>
                 <Image

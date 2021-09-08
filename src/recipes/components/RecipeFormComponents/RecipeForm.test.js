@@ -28,7 +28,7 @@ describe("RecipeForm component", () => {
 
     //Assert
     const outputElement = screen.getAllByRole("spinbutton"); //ingredients amount fields
-    console.log(outputElement);
+    // console.log(outputElement);
     expect(outputElement).toHaveLength(3);
   });
 
@@ -37,7 +37,7 @@ describe("RecipeForm component", () => {
     render(<RecipeForm />);
 
     //Act
-    screen.getByRole("none", { name: "ingredient" });
+    screen.getAllByRole("none", { name: "ingredient" });
     const addBtn = screen.getByRole("button", { name: "Add another" });
     userEvent.click(addBtn);
     const newBtn = screen.getByRole("button", { name: "Add another" });

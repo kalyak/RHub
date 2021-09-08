@@ -61,7 +61,7 @@ const DUMMY_RECIPE = [
   },
 ];
 
-const RecipeHome = () => {
+const RecipeHomePage = () => {
   return (
     <React.Fragment>
       <Container>
@@ -82,4 +82,4 @@ const RecipeHome = () => {
     </React.Fragment>
   );
 };
-export default RecipeHome;
+export default RecipeHomePage;
